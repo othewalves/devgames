@@ -9,7 +9,7 @@ interface IGameProps {
 
 export function GameCard({ data }: IGameProps) {
     return (
-        <Link href='/games/1'>
+        <Link href={`/games/${data.id}`}>
             <section className="w-full bg-slate-200 rounded-lg p-4 mb-5">
                 <div className="w-full h-56 relative hover:scale-105 transition-all duration-300">
                     <Image

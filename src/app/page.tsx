@@ -37,7 +37,7 @@ export default async function Home() {
       <Container>
         <section>
           <h1 className="text-center font-bold text-xl mt-5 mb-8">Separamos um jogo exclusivo para você</h1>
-          <Link href={`game/${gameDay.id}`}>
+          <Link href={`/games/${gameDay.id}`}>
             <section className="w-full bg-black rounded-lg">
               <div className="w-full max-h-96 h-96 relative">
                 <div className="absolute z-20 bottom-0 p-3 flex items-center justify-center gap-2">
