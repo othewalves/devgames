@@ -1,11 +1,13 @@
 import { Container } from "@/components/container/Container";
+import { GameCard } from "@/components/GameCard/GameCard";
 import { Input } from "@/components/input/Input";
 import { IGame } from "@/utils/types/games";
 import Image from "next/image";
 import Link from "next/link";
 import { BsArrowRightSquare } from "react-icons/bs";
 
-async function getData() {
+
+async function getGameDay() {
   try {
 
     const res = await fetch(`${process.env.NEXT_API_URL}/next-api/?api=game_day`, { next: { revalidate: 320 } })
@@ -15,9 +17,20 @@ async function getData() {
   }
 }
 
+async function getGameRecommend() {
+  try {
+
+    const res = await fetch(`${process.env.NEXT_API_URL}/next-api/?api=games`, { next: { revalidate: 320 } })
+    return res.json()
+  } catch (error) {
+    throw new Error('Houve um imprevisto, tente mais tarde.')
+  }
+}
+
 export default async function Home() {
 
-  const gameDay: IGame = await getData();
+  const gameDay: IGame = await getGameDay();
+  const gamesRecommend: IGame[] = await getGameRecommend();
 
   return (
     <main className="w-full">
@@ -44,7 +57,20 @@ export default async function Home() {
             </section>
           </Link>
         </section>
-        <Input/>
+        <Input />
+        <h2 className="text-lg font-bold mt-8 mb-5">
+          Jogos para conhecer
+        </h2>
+        <section className="grid gap-7 sm:grid-cols-2  md:grid-cols-3 lg:grid-cols-4">
+          {
+            gamesRecommend.map((item) => (
+              <GameCard
+                key={item.id}
+                data={item}
+              />
+            ))
+          }
+        </section>
       </Container>
     </main>
   );
