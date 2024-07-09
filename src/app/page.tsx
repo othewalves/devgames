@@ -1,4 +1,5 @@
 import { Container } from "@/components/container/Container";
+import { Input } from "@/components/input/Input";
 import { IGame } from "@/utils/types/games";
 import Image from "next/image";
 import Link from "next/link";
@@ -17,9 +18,6 @@ async function getData() {
 export default async function Home() {
 
   const gameDay: IGame = await getData();
-  console.log(gameDay);
-
-
 
   return (
     <main className="w-full">
@@ -46,6 +44,7 @@ export default async function Home() {
             </section>
           </Link>
         </section>
+        <Input/>
       </Container>
     </main>
   );
